@@ -1,0 +1,167 @@
+.container{
+    background-color: black;
+    width:100%;
+    height:100%;
+}
+
+.blue-fire{
+    width:160%;
+    height: 100px;
+    position: fixed;
+    left: -30%;
+    z-index: 1;
+}
+
+.enemy-container{
+    width:100%;
+    height: 100px;
+
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center !important;
+    z-index:2;
+}
+
+.enemy-img{
+    width:60px;
+    height: 60px;
+}
+
+
+
+.search::placeholder{
+    color: white;
+}
+
+.hero-container{
+    width:300px;
+    margin:auto;
+    padding-top: 150px;
+}
+
+.hero-detail{
+    display:flex;
+
+    margin-bottom: 10px;
+}
+
+img.hero-img{
+    width:50px;
+    height:50px;
+    
+    border-radius: 50%;
+    border-top-right-radius: 0;
+    border: 2px solid gray;
+}
+
+.hero-name-container{
+    width: 240px;
+    height: 50px;
+
+    // text-align: center
+    // display: flex;
+    // align-items: center; /* Vertical center alignment */
+    // justify-content: center; /* Horizontal center alignment */
+
+    
+    margin: 0;
+}
+
+.hero-name{
+    padding-top: 5px;
+    padding-left: 5px;
+}
+
+.neon{
+    width:100%;
+    height:2px;
+    background-color: gray;
+}
+
+.hero-name{
+    width:100%;
+    height:20px;
+    color: white;
+}
+
+.neon-selected{
+    background-color: white;
+    box-shadow:
+        0 0 .5rem #fff,
+        inset 0 0 .5rem #fff,
+        0 0 1rem #08f,
+        inset 0 0 1rem #08f,
+        0 0 2rem #08f,
+        inset 0 0 2rem #08f; 
+}
+
+.hero-img-selected{
+    border: 2px solid #b3ecff !important;
+    border-bottom-left-radius: 0 !important;
+    box-shadow:
+        0 0 .5rem #fff,
+        inset 0 0 .5rem #fff,
+        0 0 1rem #08f,
+        inset 0 0 1rem #08f,
+        0 0 2rem #08f,
+        inset 0 0 2rem #08f;  
+}
+
+.footer{
+    width: 100%;
+    height: 50px;
+
+    position: fixed;
+    bottom: 10px;
+    
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.search-bar{
+    width: 280px;
+    height: 100%;
+
+    display:flex;
+    justify-content: center;
+    align-items: center;
+
+    border: 2px solid gray;
+    border-radius: 25px;
+
+    background-color: #343a40;
+    color: white;
+}
+
+.search-icon{
+    color:white;
+}
+
+.search, .search:focus{
+    width:70%;
+    outline: none;
+
+    border:0;
+    background-color: #343a40;
+    color: white;
+
+    font-size: 20px;
+}
+
+.toggle-bar {
+    height: 50px;
+    width: 100%;
+
+    position: fixed;
+    top:100px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.toggle{
+    color:white;
+}

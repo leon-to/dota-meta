@@ -1,0 +1,48 @@
+
+<div class="container">
+
+    <img class="blue-fire" src="assets/gif/blue-fire.gif">
+        
+    <div class="enemy-container">
+        <div *ngFor="let enemy of enemies">
+            <img class="enemy-img" [src]="enemy.img">
+        </div>
+    </div>
+
+
+    <div class="toggle-bar">
+        <mat-slide-toggle class="toggle">
+            Lock Enemies
+        </mat-slide-toggle>
+    </div>
+
+    <div class="hero-container">
+        <div *ngFor="let hero of heroes">
+            <div class="hero-detail" (click)="onSelect(hero)">
+                <img 
+                    class="hero-img" 
+                    [src]="hero.img"
+                    [class.hero-img-selected]="hero===selectedHero"
+                    >
+                
+                <span class="hero-name-container" >
+                    <div 
+                        class="neon" 
+                        [class.neon-selected]="hero===selectedHero" 
+                 
+                        ></div>
+                    <h2 class="hero-name" style="margin:0">{{hero.name}}</h2>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="search-bar">
+            <i class="material-icons search-icon">search</i>
+            <input 
+                class="search" type="search" 
+                placeholder="Enter hero's name">
+        </div>
+    </div>
+</div>
