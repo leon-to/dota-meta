@@ -1,7 +1,8 @@
 .container{
     background-color: black;
     width:100%;
-    height:100%;
+    min-height: 100%;
+    padding-bottom: 60px;
 }
 
 .blue-fire{
@@ -28,8 +29,6 @@
     height: 60px;
 }
 
-
-
 .search::placeholder{
     color: white;
 }
@@ -40,13 +39,15 @@
     padding-top: 150px;
 }
 
-.hero-detail{
-    display:flex;
-
+.hero{
     margin-bottom: 10px;
 }
 
-img.hero-img{
+.hero-detail{
+    display:flex;
+}
+
+.hero-img{
     width:50px;
     height:50px;
     
@@ -69,8 +70,89 @@ img.hero-img{
 }
 
 .hero-name{
+    width:100%;
+    height:20px;
+
+    color: white;
     padding-top: 5px;
     padding-left: 5px;
+}
+
+
+.hero-img-selected{
+    border: 2px solid #b3ecff !important;
+    border-bottom-left-radius: 0 !important;
+    box-shadow:
+        0 0 .5rem #fff,
+        inset 0 0 .5rem #fff,
+        0 0 1rem #08f,
+        inset 0 0 1rem #08f,
+        0 0 2rem #08f,
+        inset 0 0 2rem #08f;  
+}
+
+.hero-strength-container{
+    display: flex;
+}
+
+.hero-strength{
+    width: 298px;
+}
+
+.role-container{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.role{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.role-name{
+    color:white;
+}
+
+.skill-container{
+    display: flex;
+    flex-wrap: wrap;
+    // align-items: center;
+    justify-content: center;
+    
+}
+
+.skill{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    // justify-content: center;
+}
+
+.skill-img{
+    width: 40px;
+    height: 40px;
+}
+
+.skill-name{
+    width:30px;
+    color:white;
+    font-size: 8px;
+    text-align: center;
+}
+
+.credit{
+    width: 300px;
+    color: white;
+    font-size: 8px;
+    text-align: center;
+    margin-top: 5px;
+}
+
+.credit-license{
+    color: green;
 }
 
 .neon{
@@ -79,10 +161,10 @@ img.hero-img{
     background-color: gray;
 }
 
-.hero-name{
-    width:100%;
-    height:20px;
-    color: white;
+.neon-col{
+    width:2px;
+    height:auto;
+    background-color: gray;
 }
 
 .neon-selected{
@@ -96,17 +178,6 @@ img.hero-img{
         inset 0 0 2rem #08f; 
 }
 
-.hero-img-selected{
-    border: 2px solid #b3ecff !important;
-    border-bottom-left-radius: 0 !important;
-    box-shadow:
-        0 0 .5rem #fff,
-        inset 0 0 .5rem #fff,
-        0 0 1rem #08f,
-        inset 0 0 1rem #08f,
-        0 0 2rem #08f,
-        inset 0 0 2rem #08f;  
-}
 
 .footer{
     width: 100%;
@@ -133,6 +204,7 @@ img.hero-img{
 
     background-color: #343a40;
     color: white;
+    opacity: 85%;
 }
 
 .search-icon{
@@ -160,6 +232,9 @@ img.hero-img{
     display: flex;
     justify-content: center;
     align-items: center;
+
+    background-color: black;
+    opacity: 85%;
 }
 
 .toggle{
