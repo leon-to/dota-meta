@@ -5,15 +5,18 @@
         
     <div class="enemy-container">
         <div *ngFor="let enemy of enemies" (click)="onSelect(enemy)">
-            <img class="enemy-img" [src]="enemy.avatar">
+            <img class="enemy-img" [src]="enemy.img">
         </div>
     </div>
 
-
-    <div class="toggle-bar">
-        <mat-slide-toggle class="toggle">
-            Lock Enemies
-        </mat-slide-toggle>
+    <div class="config">
+        <button class="reset">Reset</button>
+    
+        <div class="toggle-bar">
+            <mat-slide-toggle class="toggle" [checked]="locked" [(ngModel)]="locked" (change)="onLockClick()">
+                Lock
+            </mat-slide-toggle>
+        </div>
     </div>
 
     <div class="hero-container">
@@ -23,7 +26,7 @@
             <div class="hero-detail" (click)="onSelect(hero)">
                 <img 
                     class="hero-img" 
-                    [src]="hero.avatar"
+                    [src]="hero.img"
                     [class.hero-img-selected]="hero===selectedHero">
                 
                 <span class="hero-name-container" >
@@ -31,22 +34,27 @@
                         class="neon" 
                         [class.neon-selected]="hero===selectedHero" ></div>
                         
-                    <h2 class="hero-name" style="margin:0">{{hero.name}}</h2>
+                    <div style="display: flex;">
+                        <h2 class="hero-name" style="margin:0">{{hero.name}}</h2>
+                        <div [class.pos-score]="hero.score > 0" [class.zero-score]="hero.score===0" *ngIf="locked">{{hero.score}}</div>
+                    </div>
                 </span>
             </div>
 
             <div
                 *ngIf="hero===selectedHero" 
                 class="hero-strength-container">
+
                 <div class="neon-col neon-selected"></div>
-                <div class="hero-strength">
+                
+                <div class="hero-strength" *ngIf="!locked">
                     <div class="role-container">
                         <div 
                             class="role" 
                             *ngFor="let role of hero.roles">
 
-                            <img [src]="role[1]">
-                            <span class="role-name">{{role[0]}}</span>
+                            <img [src]="roles[role]">
+                            <span class="role-name">{{role}}</span>
                         </div>
                     </div>
                     <div class="skill-container">
@@ -54,8 +62,24 @@
                             class="skill" 
                             *ngFor="let skill of hero.skills">
 
-                            <img class="skill-img" [src]="skill[1]">
-                            <span class="skill-name">{{skill[0]}}</span>
+                            <img class="skill-img" [src]="skill.img">
+                            <span class="skill-name">{{skill.name}}</span>
+                        </div>
+                    </div>
+                    <div class="credit">
+                        dota2.gamepedia.com <span class="credit-license">CC BY-NC-SA 3.0</span>
+                    </div>
+                </div>
+
+                <div class="counter-container" *ngIf="locked">
+                    <div 
+                        class="counter"
+                        *ngFor="let counter of counterLookup[hero.name]">
+                        <img class="counter-img" [src]="heroesLookup[counter.name]['img']">
+                        <div class="counter-text">
+                            <div class="counter-text-line" *ngFor="let line of counter.content">
+                                {{line}}
+                            </div>
                         </div>
                     </div>
                     <div class="credit">

@@ -9,6 +9,9 @@ import { MatSliderModule } from '@angular/material/slider';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { FormsModule } from '@angular/forms';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { HttpClientModule } from '@angular/common/http';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,6 +25,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     MatSlideToggleModule,
     FormsModule,
     Ng2SearchPipeModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
