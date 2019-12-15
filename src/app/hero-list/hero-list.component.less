@@ -1,22 +1,23 @@
 .container{
     background-color: black;
     width:100%;
-    min-height: 100%;
-    padding-bottom: 60px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 .blue-fire{
-    width:160%;
+    width:100%;
     height: 100px;
     position: fixed;
-    left: -30%;
+    // display: inline-block;
+    // left: -30%;
     z-index: 1;
 }
 
 .enemy-container{
     width:100%;
     height: 100px;
-
     position: fixed;
     display: flex;
     align-items: center;
@@ -33,13 +34,28 @@
     color: white;
 }
 
+.virtual-scroll-container{
+    width:100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    // padding-top: 150px;
+    margin-top: 150px;
+    margin-bottom: 50px;
+}
+
 .hero-container{
-    width:300px;
-    margin:auto;
-    padding-top: 150px;
+    width:100%;
+    height:440px;
+    // margin:auto;
+    // margin-top: 150px;
 }
 
 .hero{
+    width:300px;
+
+    margin:auto;
     margin-bottom: 10px;
 }
 

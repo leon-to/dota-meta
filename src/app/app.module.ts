@@ -10,7 +10,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { FormsModule } from '@angular/forms';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { HttpClientModule } from '@angular/common/http';
-
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 @NgModule({
   declarations: [
@@ -26,6 +26,7 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     Ng2SearchPipeModule,
     HttpClientModule,
+    ScrollingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

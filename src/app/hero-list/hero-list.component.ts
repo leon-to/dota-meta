@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import HEROES from './heroes.json';
 import { RestAPIService } from './restapi.service';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-hero-list',
@@ -24,9 +25,10 @@ export class HeroListComponent implements OnInit {
 
   ngOnInit() {
     this.locked = false;
+    this.filteredHeroes = HEROES;
     this.RestAPIService.getHeroes().subscribe(heroes => {
       this.heroes = heroes;
-      this.filteredHeroes = heroes;
+      // this.filteredHeroes = heroes;
       this.heroes.map((hero, i)=>{
         this.heroesLookup[hero.name] = {'id': i, 'img': hero.img};
       });
@@ -34,7 +36,7 @@ export class HeroListComponent implements OnInit {
     this.RestAPIService.getRoles().subscribe(roles => (this.roles = roles), ()=>{}, ()=>{console.log('done')});
     // console.log(this.heroes);
     // console.log(this.roles);
-    console.log(this.heroesLookup);
+    // console.log(this.heroesLookup);
   }
 
   onSelect(hero){
