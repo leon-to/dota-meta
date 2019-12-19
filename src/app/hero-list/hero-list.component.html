@@ -1,19 +1,19 @@
 
 <div class="container">
 
-    <img class="blue-fire" src="assets/gif/blue-fire.webp">
+    <img class="blue-fire" [src]="AssetsService.of('Blue Fire')">
         
     <div class="enemy-container">
         <div *ngFor="let enemy of enemies" (click)="onSelect(enemy)">
-            <img class="enemy-img" [src]="enemy.img">
+            <img class="enemy-img" [src]="AssetsService.of(enemy.name)">
         </div>
     </div>
 
     <div class="config">
-        <button class="reset">Reset</button>
+        <button class="reset" (click)="onReset()">Reset</button>
     
         <div class="toggle-bar">
-            <mat-slide-toggle class="toggle" [checked]="locked" [(ngModel)]="locked" (change)="onLockClick()">
+            <mat-slide-toggle class="toggle" [checked]="locked" [(ngModel)]="locked" (change)="onLock()">
                 Lock
             </mat-slide-toggle>
         </div>
@@ -28,7 +28,7 @@
                     <img 
                         class="hero-img" 
                         type="video/mp4"
-                        [src]="hero.img"
+                        [src]="AssetsService.of(hero.name)"
                         [class.hero-img-selected]="hero===selectedHero">
                     
                     <span class="hero-name-container" >
@@ -55,7 +55,7 @@
                                 class="role" 
                                 *ngFor="let role of hero.roles">
 
-                                <img [src]="roles[role]">
+                                <img class="role-img" [src]="AssetsService.of(role)">
                                 <span class="role-name">{{role}}</span>
                             </div>
                         </div>
@@ -64,8 +64,8 @@
                                 class="skill" 
                                 *ngFor="let skill of hero.skills">
 
-                                <img class="skill-img" [src]="skill.img">
-                                <span class="skill-name">{{skill.name}}</span>
+                                <img class="skill-img" [src]="AssetsService.of(skill)">
+                                <span class="skill-name">{{skill}}</span>
                             </div>
                         </div>
                         <div class="credit">
@@ -75,14 +75,17 @@
 
                     <div class="counter-container" *ngIf="locked">
                         <div 
-                            class="counter"
-                            *ngFor="let counter of counterLookup[hero.name]">
-                            <img class="counter-img" [src]="heroesLookup[counter.name]['img']">
-                            <div class="counter-text">
-                                <div class="counter-text-line" *ngFor="let line of counter.content">
-                                    {{line}}
+                            
+                            *ngFor="let enemy of enemies">
+                            <div class="counter" *ngIf="counters[enemy.name] && counters[enemy.name][hero.name]">
+                                <img class="counter-img" [src]="AssetsService.of(enemy.name)">
+                                <div class="counter-text">
+                                    <div class="counter-text-line" *ngFor="let line of counters[enemy.name][hero.name]">
+                                        {{line}}
+                                    </div>
                                 </div>
                             </div>
+
                         </div>
                         <div class="credit">
                             dota2.gamepedia.com <span class="credit-license">CC BY-NC-SA 3.0</span>
@@ -99,7 +102,7 @@
             <i class="material-icons search-icon">search</i>
             <input 
                 [(ngModel)]="searchText"
-                (input)="search()"
+                (input)="onSearch()"
                 class="search" type="text" 
                 placeholder="Enter hero's name">
         </div>

@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import HEROES from './heroes.json';
+import HEROES from '../../assets/json/heroes.json';
 import { RestAPIService } from './restapi.service';
+import { AssetsService } from './assets.service';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+
 
 @Component({
   selector: 'app-hero-list',
@@ -9,41 +11,27 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
   styleUrls: ['./hero-list.component.less']
 })
 export class HeroListComponent implements OnInit {
-  heroesLookup = {};
-  counterLookup = {};
   heroes;
-  roles;
-  counteringHeroes;
+  counters;
   enemies = [];
-  enemyMap = {};
   filteredHeroes;
   selectedHero;
   searchText;
   locked;
 
-  constructor(private RestAPIService: RestAPIService) { }
+  constructor(
+    private RestAPIService: RestAPIService,
+    public AssetsService: AssetsService
+  ) {}
 
   ngOnInit() {
     this.locked = false;
-    this.filteredHeroes = HEROES;
-    this.RestAPIService.getHeroes().subscribe(heroes => {
-      this.heroes = heroes;
-      // this.filteredHeroes = heroes;
-      this.heroes.map((hero, i)=>{
-        this.heroesLookup[hero.name] = {'id': i, 'img': hero.img};
-      });
-    });
-    this.RestAPIService.getRoles().subscribe(roles => (this.roles = roles), ()=>{}, ()=>{console.log('done')});
-    // console.log(this.heroes);
-    // console.log(this.roles);
-    // console.log(this.heroesLookup);
+    this.counters = {};
+    this.heroes = HEROES;
+    this.filteredHeroes = this.heroes;
   }
-
   onSelect(hero){
-    // console.log(this.counterLookup);
-    // console.log(this.heroes);
     this.selectedHero = hero;
-    console.log(this.locked);
     if(this.locked) return;
 
     if (this.enemies.includes(hero)){
@@ -51,32 +39,33 @@ export class HeroListComponent implements OnInit {
     }
     else if(this.enemies.length < 5)
       this.enemies.push(hero);
+
+    console.log(this.enemies);
   }
-  onLockClick(){
+  onReset(){
+    this.enemies = [];
+    this.locked = false;
+    this.filteredHeroes = this.heroes;
+  }
+  onLock(){
     if(this.locked){
-      let idArr = this.enemies.map((hero, i) => this.heroesLookup[hero.name]['id']);
-      let idStr = idArr.toString();
-      this.RestAPIService.getCounteringHeroes(idStr).subscribe(counterLookup => {
-        this.counterLookup = counterLookup;
+      this.RestAPIService.getCounteringHeroes(this.enemies.map(enemy=>enemy.name)).subscribe(counters => {
+        this.counters = counters;
         for(let hero of this.heroes){
-          let countering = counterLookup[hero.name];
-          if(countering.length === 0)
-            hero['score'] = 0;
-          else{
-            hero['score'] = countering.length * 2;
-            for(let c of countering)
-              hero['score'] += c.content.length;
+          hero.score = 0;
+          for(let enemy of this.enemies){
+            if (hero.name in counters[enemy.name])
+              hero.score += counters[enemy.name][hero.name].length;
           }
         }
-        this.filteredHeroes = Array.from(this.heroes).sort((a, b) => (b['score'] - a['score']));
-        console.log(this.filteredHeroes);
+        this.filteredHeroes = this.filteredHeroes.filter(hero => !this.enemies.includes(hero));
+        this.filteredHeroes = Array.from(this.filteredHeroes).sort((a, b) => (b['score'] - a['score']));
       });
-
     }else{
-      this.filteredHeroes = this.heroes;
+      this.filteredHeroes = HEROES;
     }
   }
-  search(){
+  onSearch(){
     var tmp = this.heroes.filter(hero => hero.name.toLowerCase().includes(this.searchText.toLowerCase()));
     if(this.locked){
       this.filteredHeroes = Array.from(tmp).sort((a, b) => (b['score'] - a['score']));

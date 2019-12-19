@@ -6,14 +6,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class RestAPIService {
   constructor(private http: HttpClient) { }
-
-  getHeroes(){
-    return this.http.get('/heroes/all');
-  }
-  getRoles(){
-    return this.http.get('/roles');
-  }
-  getCounteringHeroes(idStr){
-    return this.http.get(`/heroes/counter/${idStr}`);
+  getCounteringHeroes(heroes){
+    return this.http.post('https://us-central1-dota-meta-test.cloudfunctions.net/heroes/counter', heroes);
   }
 }
